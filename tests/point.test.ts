@@ -18,7 +18,7 @@ describe("Single Point tests", () => {
     }).toThrow();
   });
 
-  test("Invalid column", () => {
+  test("Invalid zero column", () => {
     expect(() => {
       const p = new Point("C0");
     }).toThrow();
@@ -28,7 +28,6 @@ describe("Single Point tests", () => {
     expect(() => {
       const p = new Point("D23");
     }).toThrow();
-
   });
 
 });
@@ -37,21 +36,21 @@ describe("Point comparison tests", () => {
   test("Point equality", () => {
     const p1 = new Point("A4");
     const p2 = new Point("A4");
-    expect(p1).toEqual(p2);
+    expect(p1.equals(p2)).toEqual(true);
   });
 
   test("Points share row", () => {
     const p1 = new Point("A4");
     const p2 = new Point("A5");
-    expect(p1.sharesRow(p2)).toBeTruthy();
-    expect(p1.sharesColumn(p2)).toBeFalsy();
+    expect(p1.sharesRow(p2)).toEqual(true);
+    expect(p1.sharesColumn(p2)).toEqual(false);
   });
 
   test("Points share column", () => {
     const p1 = new Point("A4");
     const p2 = new Point("B4");
-    expect(p1.sharesRow(p2)).toBeFalsy();
-    expect(p1.sharesColumn(p2)).toBeTruthy();
+    expect(p1.sharesRow(p2)).toEqual(false);
+    expect(p1.sharesColumn(p2)).toEqual(true);
   });
 
 });
@@ -63,7 +62,7 @@ describe("Connecting point tests", () => {
     const points: Point[] = p1.getStraightLineConnectingSequence(p2);
     expect(points.length).toEqual(1);
   });
-  
+
   test("2 point row", () => {
     const p1: Point = new Point("A4");
     const p2: Point = new Point("A5");
@@ -99,4 +98,5 @@ describe("Connecting point tests", () => {
       const points: Point[] = p1.getStraightLineConnectingSequence(p2);
     }).toThrow();
   });
+
 });

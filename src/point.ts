@@ -21,6 +21,10 @@ class Point {
     this.pointLabel = pointLabel;
   }
 
+  equals(p: Point): boolean {
+    return this.pointLabel == p.pointLabel;
+  }
+
   sharesRow(p: Point): boolean {
     return this.rowLetter == p.rowLetter;
   }
@@ -38,7 +42,7 @@ class Point {
       return [new Point(this.pointLabel)];
     }
 
-    
+
     if (this.sharesRow(p)) {
       const minColumnNumber: number = Math.min(this.columnNumber, p.columnNumber);
       const maxColumnNumber: number = Math.max(this.columnNumber, p.columnNumber);
@@ -51,8 +55,8 @@ class Point {
     }
 
     else if (this.sharesColumn(p)) {
-      const rowLetterIndexThis : number = VALID_ROW_LETTERS.indexOf(this.rowLetter);
-      const rowLetterIndexP : number = VALID_ROW_LETTERS.indexOf(p.rowLetter);
+      const rowLetterIndexThis: number = VALID_ROW_LETTERS.indexOf(this.rowLetter);
+      const rowLetterIndexP: number = VALID_ROW_LETTERS.indexOf(p.rowLetter);
 
       const minRowLetterIndex: number = Math.min(rowLetterIndexThis, rowLetterIndexP);
       const maxRowLetterIndex: number = Math.max(rowLetterIndexThis, rowLetterIndexP);
