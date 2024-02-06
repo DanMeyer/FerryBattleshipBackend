@@ -1,5 +1,6 @@
 import assert from "assert";
 import { Piece } from './piece'
+import { Point } from './point'
 
 const REQUIRED_PIECE_SIZES = [3, 3, 4, 5].sort();
 
@@ -59,7 +60,8 @@ class Board {
     return false;
   }
 
-  addPiece(piece: Piece) {
+  addPiece(start: string, end: string) {
+    const piece = new Piece(start, end);
     const validPieceSizes = this.pieceSizesRemainingToPlace();
     assert(
       validPieceSizes.includes(piece.length()),
