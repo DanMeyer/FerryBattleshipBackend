@@ -76,6 +76,22 @@ class Board {
     this.pieces.push(piece);
   }
 
+  attack(point: string) {
+    for (const piece of this.pieces) {
+      piece.attack(point);
+    }
+  }
+
+  allShipsSunk(): boolean {
+    for (const piece of this.pieces) {
+      if (!piece.isSunk()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
 }
 
 export { Board }

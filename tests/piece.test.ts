@@ -38,14 +38,14 @@ describe("Piece overlap", () => {
   test("Simple overlap", () => {
     const piece1 = new Piece("C4", "C6");
     const piece2 = new Piece("C5", "C8");
-    
+
     expect(piece1.overlaps(piece2)).toEqual(true)
   });
 
   test("Overlap works both ways", () => {
     const piece1 = new Piece("C4", "C6");
     const piece2 = new Piece("C5", "C8");
-    
+
     expect(piece1.overlaps(piece2)).toEqual(true)
     expect(piece2.overlaps(piece1)).toEqual(true)
   });
@@ -55,6 +55,41 @@ describe("Piece overlap", () => {
     const piece2 = new Piece("C4", "C7");
 
     expect(piece1.overlaps(piece2)).toEqual(false)
+  });
+
+});
+
+describe("Piece attacking", () => {
+  test("sink", () => {
+    const piece = new Piece("C4", "C6");
+    piece.attack("C4");
+    piece.attack("C5");
+    piece.attack("C6");
+    expect(piece.isSunk()).toEqual(true);
+  });
+
+  test("not sunk yet", () => {
+    const piece = new Piece("C4", "C6");
+    piece.attack("C4");
+    piece.attack("C5");
+    expect(piece.numHits()).toEqual(2);
+    expect(piece.isSunk()).toEqual(false);
+  });
+
+  test("miss", () => {
+    const piece = new Piece("C4", "C6");
+    piece.attack("D1");
+    expect(piece.numHits()).toEqual(0);
+    expect(piece.isSunk()).toEqual(false);
+  });
+
+  test("can not attack same spot twice", () => {
+    const piece = new Piece("C4", "C6");
+    piece.attack("C4");
+
+    expect(() => {
+      piece.attack("C4");
+    }).toThrow();
   });
 
 });

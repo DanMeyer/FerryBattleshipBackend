@@ -1,4 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
+import exp from 'constants';
 import { Board } from '../src/board';
 import { Piece } from '../src/piece';
 import { Point } from '../src/point';
@@ -87,6 +88,48 @@ describe("Board piece placement", () => {
 
 })
 
-describe("Board ", () => {
-  
-})
+describe("Board attack", () => {
+  test("Sink one ship", () => {
+    const board = new Board();
+    board.addPiece("A1", "A3");
+    board.addPiece("B1", "B3");
+    board.addPiece("C1", "C4");
+    board.addPiece("D1", "D5");
+
+    board.attack("A1");
+    board.attack("A2");
+    board.attack("A3");
+
+    expect(board.allShipsSunk()).toEqual(false);
+  });
+
+
+  test("Sink all ships", () => {
+    const board = new Board();
+    board.addPiece("A1", "A3");
+    board.addPiece("B1", "B3");
+    board.addPiece("C1", "C4");
+    board.addPiece("D1", "D5");
+
+    board.attack("A1");
+    board.attack("A2");
+    board.attack("A3");
+
+    board.attack("B1");
+    board.attack("B2");
+    board.attack("B3");
+
+    board.attack("C1");
+    board.attack("C2");
+    board.attack("C3");
+    board.attack("C4");
+
+    board.attack("D1");
+    board.attack("D2");
+    board.attack("D3");
+    board.attack("D4");
+    board.attack("D5");
+
+    expect(board.allShipsSunk()).toEqual(true);
+  });
+});

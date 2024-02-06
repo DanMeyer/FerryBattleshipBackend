@@ -8,7 +8,7 @@ class Point {
   rowLetter: string;
   columnNumber: number;
 
-  constructor(pointLabel: string = "A1") {
+  constructor(pointLabel: string) {
     assert(pointLabel.length == 2, `Point label ${pointLabel} is not of length 2`);
     const rowLetter: string = pointLabel.substring(0, 1).toUpperCase();
     assert(VALID_ROW_LETTERS.includes(rowLetter), `Point label ${pointLabel} has an invalid row letter: ${rowLetter}`);
