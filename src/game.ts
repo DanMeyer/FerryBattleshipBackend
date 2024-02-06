@@ -6,7 +6,7 @@ class Game {
   playerBoard: Board;
   computerBoard: Board;
   computer: Computer;
-  
+
   constructor() {
     this.playerBoard = new Board();
     this.computerBoard = Computer.buildRandomBoard();
@@ -23,12 +23,32 @@ class Game {
   }
 
   attackAndReply(point: string) {
+    this.assertGameIsNotOver();
     this.assertPlayerCanAttack();
 
-    this.computerBoard.attack(point);
-    if (!this.computerBoard.allShipsSunk()) {
-      this.playerBoard.attack(this.computer.nextAttack());
+    const playerDidHit = this.computerBoard.attack(point);
+    
+    if (this.computerBoard.allShipsSunk()) {
+      return {
+        "playerDidHit": true,
+        "computerAttack": null,
+        "playerHasWon": true,
+        "computerHasWon": false,
+      }
     }
+
+    const computerAttack = this.computer.nextAttack();
+    this.playerBoard.attack(computerAttack);
+    return {
+      "playerDidHit": playerDidHit,
+      "computerAttack": computerAttack,
+      "playerHasWon": false,
+      "computerHasWon": this.computerHasWon(),
+    }
+  }
+
+  assertGameIsNotOver() {
+    assert(!this.playerHasWon() && !this.computerHasWon(), "Game is over");
   }
 
   playerHasWon() {
@@ -39,3 +59,5 @@ class Game {
     return this.playerBoard.allShipsSunk();
   }
 }
+
+export { Game }

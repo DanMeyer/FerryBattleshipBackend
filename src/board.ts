@@ -78,8 +78,11 @@ class Board {
 
   attack(point: string) {
     for (const piece of this.pieces) {
-      piece.attack(point);
+      if (piece.attack(point)) {
+        return true
+      }
     }
+    return false;
   }
 
   allShipsSunk(): boolean {
