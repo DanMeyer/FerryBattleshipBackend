@@ -24,6 +24,12 @@ describe("Single Point tests", () => {
     }).toThrow();
   });
 
+  test("Valid 10 column", () => {
+    expect(() => {
+      const p = new Point("C10");
+    }).not.toThrow();
+  });
+
   test("Invalid length", () => {
     expect(() => {
       const p = new Point("D23");

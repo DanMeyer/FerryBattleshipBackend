@@ -1,7 +1,15 @@
 import assert from "assert";
+import { ALL } from "dns";
 
 const VALID_ROW_LETTERS = "ABCDEFGHIJ".split("");
 const VALID_COLUMN_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+const ALL_VALID_POINT_LABELS: string[] = [];
+for (const validRowLetter of VALID_ROW_LETTERS) {
+  for (const validColumnNumber of VALID_COLUMN_NUMBERS) {
+    ALL_VALID_POINT_LABELS.push(validRowLetter + validColumnNumber);
+  }
+}
 
 class Point {
   pointLabel: string;
@@ -9,13 +17,15 @@ class Point {
   columnNumber: number;
 
   constructor(pointLabel: string) {
-    assert(pointLabel.length == 2, `Point label ${pointLabel} is not of length 2`);
+    pointLabel = pointLabel.toUpperCase();
+
+    assert(ALL_VALID_POINT_LABELS.includes(pointLabel), `${pointLabel} is not a valid point label`);
+
     const rowLetter: string = pointLabel.substring(0, 1).toUpperCase();
-    assert(VALID_ROW_LETTERS.includes(rowLetter), `Point label ${pointLabel} has an invalid row letter: ${rowLetter}`);
     this.rowLetter = rowLetter;
 
-    const columnNumber: number = parseInt(pointLabel.substring(1, 2));
-    assert(VALID_COLUMN_NUMBERS.includes(columnNumber));
+    // columnNumber may be 1 digit (1-9) or 2 digits (10)
+    const columnNumber: number = parseInt(pointLabel.substring(1));
     this.columnNumber = columnNumber;
 
     this.pointLabel = pointLabel;
@@ -74,4 +84,4 @@ class Point {
 
 }
 
-export { Point }
+export { Point, ALL_VALID_POINT_LABELS }
