@@ -25,7 +25,7 @@ describe("Computer attacks", () => {
   test("Computer has 100 attacks prepared", () => {
     const computer = new Computer();
     for (let i = 0; i < 100; i++) {
-      const attack = computer.nextAttack();
+      computer.nextAttack();
     }
     
     expect(() => {
