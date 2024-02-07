@@ -2,6 +2,9 @@ import assert from 'assert';
 import { ALL_VALID_POINT_LABELS } from './constants';
 import { Board } from './board';
 
+/*
+  TODO: pre-generate more computer boards, OR write code to generate valid boards
+*/
 const BOARD_SCRIPTS = [
   [
     ["A1", "A3"],
