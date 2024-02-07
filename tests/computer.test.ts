@@ -1,8 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import exp from 'constants';
-import { Board } from '../src/board';
 import { Computer } from '../src/computer';
-import { Point } from '../src/point';
 
 describe("Computer board", () => {
   test("Seed 0 is valid board", () => {
@@ -17,8 +14,11 @@ describe("Computer board", () => {
     expect(remaining.length).toEqual(0);
   });
 
-
-
+  test("Random board works once", () => {
+    const board = Computer.buildRandomBoard();
+    const remaining: number[] = board.pieceSizesRemainingToPlace();
+    expect(remaining.length).toEqual(0);
+  });
 })
 
 describe("Computer attacks", () => {
@@ -27,10 +27,9 @@ describe("Computer attacks", () => {
     for (let i = 0; i < 100; i++) {
       computer.nextAttack();
     }
-    
+
     expect(() => {
       computer.nextAttack();
     }).toThrow();
   });
-
 });

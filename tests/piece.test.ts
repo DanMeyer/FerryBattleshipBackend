@@ -1,6 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
 import { Piece } from '../src/piece';
-import { Point } from '../src/point';
 
 describe("Single piece tests", () => {
 

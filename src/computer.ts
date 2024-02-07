@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { ALL_VALID_POINT_LABELS } from './point';
+import { ALL_VALID_POINT_LABELS } from './constants';
 import { Board } from './board';
 
 const BOARD_SCRIPTS = [
@@ -16,7 +16,6 @@ const BOARD_SCRIPTS = [
     ["D6", "D10"],
     ["I4", "I6"],
   ],
-
 ];
 
 class Computer {

@@ -1,8 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import exp from 'constants';
 import { Board } from '../src/board';
-import { Piece } from '../src/piece';
-import { Point } from '../src/point';
 
 describe("Board remaining pieces", () => {
   test("Empty board has 4 left pieces to place", () => {

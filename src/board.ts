@@ -1,6 +1,5 @@
 import assert from "assert";
 import { Piece } from './piece'
-import { Point } from './point'
 
 const REQUIRED_PIECE_SIZES = [3, 3, 4, 5].sort();
 
